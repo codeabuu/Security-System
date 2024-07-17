@@ -40,5 +40,15 @@ def handle_detection(path_to_file):
     thread = threading.Thread(target=action_thread, args=(path_to_file,))
     thread.start()
 
-def list_videos_in_data_range(start_date, end_data, extension=".mp4"):
-    pass
+def list_videos_in_data_range(start_date, end_date, extension=".mp4"):
+    start_datetime = datetime.strptime(start_date, '%Y-%m-%d')
+    end_datetime = datetime.strptime(end_date, '%Y-%m-%d')
+
+    matching_files = []
+
+    for blob in bucket.list_blobs():
+        blob_created_naive = blob.time_created.replace(tzinfo=None)
+        if blob.name.endswith(extension):
+            if start_datetime <= blob_created_naive <= end_datetime:
+                matching_files.append({"url": blob.public_url, "data": blob.time_created})
+    return matching_files
