@@ -8,7 +8,8 @@ from datetime import datetime
 BUCKET_NAME = "video-security-bucket123"
 API_ENDPOINT = "http://127.0.0.1:5000/motion_detected"
 
-STORAGE_CLIENT = storage.Client.from_service_account_json('credentials.json')
+credentials_path = r'C:\Users\Admin\Desktop\prp\Security-System\backend\credentials.json'
+STORAGE_CLIENT = storage.Client.from_service_account_json(credentials_path)
 bucket = STORAGE_CLIENT.get_bucket(BUCKET_NAME)
 
 def upload_to_bucket(blob_name, path_to_file):

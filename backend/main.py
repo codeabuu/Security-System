@@ -21,3 +21,29 @@ def motion_detected():
         print("'url' not in incoming data")
 
     return jsonify({}), 201
+
+@app.route('/arm', methods=['POST'])
+def arm():
+    camera.arm()
+    return jsonify(message="System armed"), 200
+
+@app.route('/disarm', methods=['POST'])
+def disarm():
+    camera.disarm()
+    return jsonify(message='System disarmed'), 200
+
+@app.route('/get-armed', methods=['GET'])
+def get_armed():
+    return jsonify(armed=camera.armed), 200
+
+@app.route('/get-logs')
+def get_logs():
+    start_date = request.args.get('startDate')
+    end_date = request.args.get('endDate')
+
+    logs = list_videos_in_date_range(start_date, end_date)
+    return jsonify ({'logs': logs}), 200
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
