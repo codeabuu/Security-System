@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import MainPage from "./Main";
+import DetailsPage from "./Details";
+
+const MAIN_PAGE = "main";
+const DETAILS_PAGE = "details_page";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [page, setPage] = useState(MAIN_PAGE);
+  const [log, setLog] = useState(undefined);
+
+  if (page === MAIN_PAGE)
+    return (
+      <MainPage
+        onLogClicked={(url, date) => {
+          setLog({ url, date });
+          setPage(DETAILS_PAGE);
+        }}
+      />
+    );
+  else {
+    return (
+      <DetailsPage
+        onBackClicked={() => {
+          setPage(MAIN_PAGE);
+          setLog(undefined);
+        }}
+        {...log}
+      />
+    );
+  }
 }
 
 export default App;
