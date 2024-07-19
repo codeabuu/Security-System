@@ -27,7 +27,7 @@ Before starting, ensure you have the following installed:
     ```
 2. Install python dependencies:
     ```bash
-    pip install -r requiremnts.txt
+    pip install -r requirements.txt
     ```
 ### Frontend Installation
 
@@ -61,7 +61,7 @@ npm start
 
 Ensure you have configured Google Cloud Storage for video storage. Set up your Google Cloud credentials and update the necessary configurations in the `storage.py` file.
 
-Here is step-by-step (guide)[https://g.co/gemini/share/152a62030ff7] on how to onfigure Google Cloud-credentials.
+Here is step-by-step [guide](https://g.co/gemini/share/152a62030ff7) on how to onfigure Google Cloud-credentials.
 
 ### Notifications
 
